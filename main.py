@@ -4,10 +4,9 @@ try:
 	from os import system
 	import socket
 	from colorama import Fore, Style
-	import shodan
 	
-	baza = ['--- 7 класс ---', 'алгебра 7 класс Колягин', 'английский 7 класс Starlight', 'английский 7 класс Starlight Workbook',
-	'биология 7 класс Латюшин', 'геометрия 7 класс Атанасян', 'география 7 класс Алексеев', 'информатика 7 класс Босова', 'русский язык 7 класс Ладыженская', 'физика']
+	baza = ['--- 6 класс ---', 'английский 6 класс Старлайт', 'география 6 класс Ложбанидзе','история россии 6 класс Пчелов', 'литература 6 класс Коровина', 'математика 6 класс Мерзляк', 'русский 6 класс Ладыженская', '', '--- 7 класс ---', 'алгебра 7 класс Колягин', 'английский 7 класс Старлайт', 'английский 7 класс Старлайт Воркбук',
+	'биология 7 класс Латюшин', 'геометрия 7 класс Атанасян', 'география 7 класс Алексеев', 'информатика 7 класс Босова', 'литература 7 класс Коровина', 'русский язык 7 класс Ладыженская', 'физика 7 класс Перышкин']
 	
 	logo = '''
 	╔══════════════════════════════════════════════════════════════╗
@@ -50,8 +49,6 @@ try:
 	def checkinternet():
 	    clear()
 	    try:
-	        # connect to the host -- tells us if the host is actually
-	        # reachable
 	        print("Проверка подключения интернета...")
 	        socket.create_connection(("www.google.com", 80))
 	        print(Fore.GREEN + "Интернет доступен")
@@ -74,6 +71,7 @@ try:
 	    print("Выберите опцию:")
 	    print("1. Найти гдз")
 	    print("2. Посмотреть список предметов")
+	    print("0. Выйти")
 	    try:
 	    	op = int(input("Опция: "))
 	    	pass
@@ -87,6 +85,81 @@ try:
 	        logotip()
 	        predm = input("Какой предмет? ")
 	        if predm in baza:
+	            # 6 КЛАСС
+	            if predm == "английский 6 класс Старлайт":
+	            	page = int(input("Какая страница? "))
+	            	if page >= 1:
+	            		opened()
+	            		webbrowser.open(f"https://gdz.ru/class-6/english/reshebnik-baranova-k-m-starlight-6-zvezdnyy-angliyskiy/{page}-s/")
+	            		tostart()
+	            	elif page < 1:
+	            		nemozhet()
+	            		tostart()
+	            elif predm == "география 6 класс Ложбанидзе":
+	            	paragraf = int(input("Какой параграф? "))
+	            	if paragraf >= 1:
+	            		opened()
+	            		webbrowser.open(f"https://gdz.ru/class-5/geografiya/lobzhanidze/{paragraf}-item/")
+	            		tostart()
+	            	elif paragraf < 1:
+	            		nemozhet()
+	            		tostart()
+	            elif predm == "история россии 6 класс Пчелов":
+	            	paragraf = int(input("Какой параграф? "))
+	            	if paragraf >= 1 and paragraf != 6:
+	            		opened()
+	            		webbrowser.open(f"https://gdz.ru/class-6/istoriya/pchelov/{paragraf}-item/")
+	            		tostart()
+	            	elif paragraf == 6:
+	            		opened()
+	            		webbrowser.open("https://gdz.ru/class-6/istoriya/pchelov/5-item/")
+	            		tostart()
+	            	elif paragraf < 1:
+	            		nemozhet()
+	            		tostart()
+	            elif predm == "литература 6 класс Коровина":
+	            	part = int(input("Какая часть учебника? "))
+	            	if part < 1 or part > 2:
+	            		print(Fore.RED + "Такой части нет!")
+	            		print(Style.RESET_ALL)
+	            		tostart()
+	            	elif part == 1:
+	            		page = int(input("Какая страница? "))
+	            		if page >= 1:
+	            			opened()
+	            			webbrowser.open(f"https://gdz.ru/class-6/literatura/poluhina-korovina/1-prt-{page}/")
+	            			tostart()
+	            		elif page < 1:
+	            			nemozhet()
+	            			tostart()
+	            	elif part == 2:
+	            		page = int(input("Какая страница? "))
+	            		if page >= 1:
+	            			opened()
+	            			webbrowser.open(f"https://gdz.ru/class-6/literatura/poluhina-korovina/2-prt-{page}/")
+	            			tostart()
+	            		elif page < 1:
+	            			nemozhet()
+	            			tostart()
+	            elif predm == "математика 6 класс Мерзляк":
+	            	nomer = int(input("Какой номер? "))
+	            	if nomer >= 1:
+	            		opened()
+	            		webbrowser.open(f"https://gdz.ru/class-6/matematika/a-g-merzlyak/{nomer}-nom/")
+	            		tostart()
+	            	elif nomer < 1:
+	            		nemozhet()
+	            		tostart()
+	            elif predm == "русский 6 класс Ладыженская":
+	            	nomer = int(input("Какой номер? "))
+	            	if nomer >= 1:
+	            		opened()
+	            		webbrowser.open(f"https://gdz.ru/class-6/russkii_yazik/baranov-2008/{nomer}-nom/")
+	            		tostart()
+	            	elif nomer < 1:
+	            		nemozhet()
+	            		tostart()
+	            # 7 КЛАСС
 	            if predm == "алгебра 7 класс Колягин":
 	                nomer = int(input("Какой номер? "))
 	                if nomer >= 1:
@@ -124,7 +197,7 @@ try:
 	                    print(Fore.RED + "Такой главы нет!")
 	                    print(Style.RESET_ALL)
 	                    tostart()
-	            elif predm == "английский 7 класс Starlight":
+	            elif predm == "английский 7 класс Старлайт":
 	                page = int(input("Какая страница? "))
 	                if page >= 1 and page <= 166:
 	                    webbrowser.open(f"https://gdz.ru/class-7/english/starlight-baranova/{page}-s/")
@@ -138,7 +211,7 @@ try:
 	                    print(Fore.RED + "Такой страницы нет!")
 	                    print(Style.RESET_ALL)
 	                    tostart()
-	            elif predm == "английский 7 класс Starlight Workbook":
+	            elif predm == "английский 7 класс Старлайт Воркбук":
 	                page = int(input("Какая страница? "))
 	                if page >= 1 and page <= 95:
 	                    webbrowser.open(f"https://gdz.ru/class-7/english/starlight-tetrad-baranova/{page}-s/")
@@ -147,7 +220,7 @@ try:
 	                elif page < 1 or page > 95:
 	                    nopage()
 	                    tostart()
-	            elif predm == "физика":
+	            elif predm == "физика 7 класс Перышкин":
 	                print("Выберите тип задания.")
 	                print("1. Упражнения.")
 	                print("2. Вопросы в конце параграфа.")
@@ -210,6 +283,31 @@ try:
 	            	if paragraf >= 1:
 	            		opened()
 	            		webbrowser.open(f"https://gdz.ru/class-7/biologiya/latiushin/{paragraf}-item/")
+	            		tostart()
+	            	elif paragraf < 1:
+	            		nemozhet()
+	            elif predm == "литература 7 класс Коровина":
+	            	part = int(input("Часть учебника: "))
+	            	if part == 1:
+	            		page = int(input("Введите страницу: "))
+	            		if page >= 1:
+	            			opened()
+	            			webbrowser.open(f"https://gdz.ru/class-7/literatura/korovina/1-prt-{page}/")
+	            			tostart()
+	            		elif page < 1:
+	            			nemozhet()
+	            	elif part == 2:
+	            		page = int(input("Введите страницу: "))
+	            		if page >= 1:
+	            			opened()
+	            			webbrowser.open(f"https://gdz.ru/class-7/literatura/korovina/2-prt-{page}/")
+	            			tostart()
+	            		elif page < 1:
+	            			nemozhet()
+	            	elif part > 2:
+	            		print(Fore.RED + "Такой части нет!")
+	            		print(Style.RESET_ALL)
+	            		tostart()
 	        elif predm != baza:
 	            print(Fore.RED + "Вы ввели предмет который не находится в нашей базе.")
 	            print(Style.RESET_ALL)
@@ -219,20 +317,24 @@ try:
 	        logotip()
 	        for i in range(len(baza)):
 	            print(baza[i])
-	            time.sleep(0.02)
+	            time.sleep(0.01)
 	        print("")
 	        tomain = input("Чтобы вернуться нажмите Enter: ")
 	        if tomain == "":
 	            mainp()
 	        else:
 	        	mainp()
+	    elif op >= 3:
+	    	mainp()
+	    if op == 0:
+	    	exit()
 	
 	
 	checkinternet()
 	mainp()
+
 except ModuleNotFoundError:
 	system("clear")
 	print("Не найдены необходимые для работы модули. Начинается установка...")
 	system("pip install colorama")
-	system("pip install shodan")
-	print("Установка завершена! Перезапустите код.")
+	system("python main.py")
